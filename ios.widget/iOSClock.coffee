@@ -11,18 +11,17 @@ format = (->
     '%H:%M:%S'
 )()
 
+style: """
+@import url(ios.widget/IOS.css)"""
+
 command: "LC_TIME='nl_NL.UTF-8' date +\"#{format}\""
 
-# the refresh frequency in milliseconds
-refreshFrequency: 1000
+refreshFrequency: '1m'
 
-# for update function
 dateOptions: dateOptions
 
-render: (output) -> """
-  <div id='simpleClock'>#{output}</div>
-"""
-
+render: (output) ->
+	"""<div id='simpleClock'>#{output}</div>"""
 update: (output) ->
   if this.dateOptions.showDate
     data = output.split('\n')
@@ -49,26 +48,27 @@ style: (->
 
   return """
     color: white
-    font-family: SF Pro Rounded
-    font-weight: 300
+    font-family: SF Pro Display
+    font-weight: 200
+    letter-spacing: 0.875px
     width: 100%
     height: 33%
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.10)   
 
     #simpleClock
-      font-size: 7em
+      font-size: 85px
       text-align: center
       position: absolute
       bottom 0
       left 50%
       transform: translate(-50%,0)
-      text-shadow: 0px 0px 0px rgba(0,0,0,0.8)   
     
     #simpleClock .clock
       margin-bottom: -5px
 
     #simpleClock .date
-      font-size: 0.20em
-      letter-spacing: 1px
-      padding-bottom: 20px
+      font-size: 23px
+      font-weight: 400
+      padding-bottom: 10px
   """
 )()

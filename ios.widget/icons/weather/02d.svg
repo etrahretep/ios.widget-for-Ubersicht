@@ -1,1 +1,26 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251.95 195.94"><defs><style>.cls-1{fill:#d5d6db;}.cls-2{fill:#fcde00;}</style></defs><title>partlyCloudy_day</title><g id="partlyCloudy_day"><path class="cls-1" d="M209.05,139.5l-6.3,1.16a50.23,50.23,0,1,0-98.69,18.09l-1.25.23a34.08,34.08,0,0,0,0,68.16H209.05a43.82,43.82,0,0,0,0-87.64Z" transform="translate(-0.92 -31.2)"/><rect class="cls-2" x="128.03" y="63.83" width="32.11" height="10.47" transform="translate(-7.56 90.91) rotate(-45)"/><rect class="cls-2" y="85.28" width="32.11" height="10.47"/><rect class="cls-2" x="22.73" y="169.13" width="32.11" height="10.47" transform="translate(-112.86 47.29) rotate(-45)"/><rect class="cls-2" x="33.55" y="53.01" width="10.47" height="32.11" transform="translate(-38.4 16.45) rotate(-45)"/><path class="cls-2" d="M76.16,160.53a41.91,41.91,0,0,1,18.72-8.8c-.12-1.53-.18-3.07-.18-4.6a58.28,58.28,0,0,1,31.62-51.77,42.33,42.33,0,1,0-50.16,65.17Z" transform="translate(-0.92 -31.2)"/><rect class="cls-2" x="85.28" width="10.47" height="32.11"/></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 200 156.09" style="enable-background:new 0 0 200 156.09;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.8;fill:#FFFFFF;enable-background:new    ;}
+	.st1{fill:#FBDD01;}
+</style>
+<g id="Layer_1">
+</g>
+<g id="iOS_UI_Kit">
+	<path id="XMLID_134_" class="st0" d="M200,119.51c0-20.21-16.38-36.59-36.59-36.59c-0.73,0-1.43,0.07-2.15,0.11
+		c-5.59-17.05-21.62-29.38-40.54-29.38c-23.57,0-42.69,19.11-42.69,42.68c0,0.56,0.06,1.09,0.08,1.64
+		c-13.88,2.29-24.47,14.31-24.47,28.84c0,16.16,13.11,29.27,29.27,29.27h82.93v-0.12C184.92,154.71,200,138.9,200,119.51z"/>
+	<rect id="XMLID_135_" x="68.29" class="st1" width="9.76" height="24.39"/>
+	<rect id="XMLID_136_" x="0" y="68.29" class="st1" width="24.39" height="9.76"/>
+	
+		<rect id="XMLID_137_" x="25.18" y="17.86" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -12.4483 30.0561)" class="st1" width="9.76" height="24.39"/>
+	
+		<rect id="XMLID_138_" x="17.86" y="111.41" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -73.4262 55.3094)" class="st1" width="24.39" height="9.76"/>
+	
+		<rect id="XMLID_139_" x="104.1" y="25.18" transform="matrix(0.7071 -0.7071 0.7071 0.7071 12.8082 91.0327)" class="st1" width="24.39" height="9.76"/>
+	<path id="XMLID_140_" class="st1" d="M53.6,101.13c4.04-4.61,9.12-8.3,15.01-10.6c2-18.12,13.29-33.47,28.96-41.23
+		c-6.2-6.34-14.83-10.29-24.4-10.29c-18.86,0-34.15,15.29-34.15,34.15C39.02,84.75,44.8,94.96,53.6,101.13z"/>
+</g>
+</svg>

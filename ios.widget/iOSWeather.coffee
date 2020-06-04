@@ -1,34 +1,34 @@
-#mode of widget (light)
-mode = "dark"
+mode = "light"
 
-#api Key from OpenWeatherMap API
 apiKey = "195785bd2dd750dca8ceb2ad990b904d"
 
-#list of city IDs from API database
 cityList = "2759821,2751316"
 
-#if you want to use imperial just change to "imperial"
 units = "metric"
 
 lang = "nl"
 
-command: "curl -s 'http://api.openweathermap.org/data/2.5/group?id=#{cityList}&lang=#{lang}&units=#{units}&appid=#{apiKey}'"
+command: "ios.widget/weather.sh"
+
+#command: "curl -s 'http://api.openweathermap.org/data/2.5/group?id=#{cityList}&lang=#{lang}&units=#{units}&appid=#{apiKey}'"
 #http://api.openweathermap.org/data/2.5/group?id=2759821,2751316&lang=nl&units=metric&appid=195785bd2dd750dca8ceb2ad990b904d
-refreshFrequency: '15m'
 
-#=== DO NOT EDIT AFTER THIS LINE unless you know what you're doing! ===
-#======================================================================
+refreshFrequency: '5m'
 
-render: (output) -> """
-  <div id='weather' class='#{mode}'>#{output}</div>
-"""
+render: (output) ->
+    """<div id='weather'>"""
 
-update: (output) ->
-    weatherData = JSON.parse(output)
+update: (output, domEl) ->
+
+    weatherData = JSON.parse(output.replace(/[^{]*/i,''))
     console.log(weatherData)
 
-    inner = ""
-    inner += "<header><img src='ios.widget/icons/weather.png' alt='icon'></img><div class='widgetName'>WEER</div></header>"
+    [Interface] = output.split(/[\r\n]+/g)
+    if Interface is "Dark" then mode = "dark" else mode = "light"
+
+    inner = ''
+    inner += "<div id='weather' class='#{mode}'>" 
+    inner += "<header><img src='ios.widget/icons/weather.svg' alt='icon'></img><div class='widgetName'>WEER</div></header>"
 
     inner += "<div class='weatherBox'>" 
     
@@ -36,79 +36,77 @@ update: (output) ->
         city = weatherData.list[i].name
         condition = weatherData.list[i].weather[0].description
         temperature = Math.round(weatherData.list[i].main.temp)
-        rainChance = weatherData.list[i].clouds.all
+        clouds = weatherData.list[i].clouds.all
         windSpeed = Math.round(weatherData.list[i].wind.speed * 10) / 10
         icon = weatherData.list[i].weather[0].icon
 
-        inner += "<div class='city'><div class='leftBox'><img src='ios.widget/icons/weather/#{icon}.svg' alt='#{icon}'></img></div><div class='middleBox'><div class='cityName'>"
+        inner += "<div class='city'><div class='leftBox'>
+        <img src='ios.widget/icons/weather/#{icon}.svg' alt='#{icon}'>
+        </img></div><div class='middleBox'><div class='cityName'>"
         inner += city
         inner += "</div><div class='condition'>"
         inner += condition
-        inner += "</div><div class='rainChance'>Kans op regen: "
-        inner += rainChance
-        inner += " %</div></div><div class='rightBox'><div class='temperature'>"
+        inner += "</div><div class='clouds'>bewolking: "
+        inner += clouds
+        inner += "%</div></div><div class='rightBox'><div class='temperature'>"
         inner += temperature
-        inner += "°</div><div class='wind'>"
+        inner += "°</div><div class='wind'>wind "
         inner += windSpeed
-        inner += " km/h</div></div></div>"
+        inner += " km/u</div></div></div>"
 
         console.log(city + condition + temperature)
     
     inner += "</div>"
 
     $(weather).html(inner)
-
-
+    
 style: """
-    color: white
-    font-family: SF Pro Rounded
+    color: rgb(235,235,235)
+    font-family: SF Pro Display
     font-weight: 300
     width: 100%
     position: absolute
-    top: calc(33% + 480px)
-    font-size: 14px
-    letter-spacing: 0.5px
+    top: 33%
+    letter-spacing: 0.875px
     
     #weather
-        border-radius: 10px
-        background-color: rgba(0,0,0,0.25)
-        -webkit-backdrop-filter: blur(20px)
-        width: 410px
-        height: 75px
+        border-radius: 13px
+        -webkit-backdrop-filter: blur(25px)
+        width: 349px
+        height: 80px
         position: absolute
         top: 0
         left 50%
         transform: translate(-50%,0)
-        padding: 45px 20px 20px 20px
- #       -webkit-box-shadow: 10px 10px 47px 0px rgba(0,0,0,0.5)
-        letter-spacing: 1px
+        padding: 40px 15px 20px 10px
+
+    #weather.light
+        background-color: rgba(255,255,255,0.5)
+        color: rgba(0,0,0,0.9)
+
+    #weather.light header, #weather.light .condition, #weather.light .clouds, #weather.light .wind
+        color: rgba(0,0,0,0.5)
 
     #weather.dark
         background-color: rgba(0,0,0,0.25)
 
-    #weather.light
-        background-color: rgba(255,255,255,0.5)
-        color: black
-
-    #weather.light header
-        color: rgba(50,50,50,0.8)
-
-    #weather.dark header
-        color: rgba(200,200,200,0.9)
+    #weather.dark header, #weather.dark .condition, #weather.dark .clouds, #weather.dark .wind
+        color: rgba(255,255,255,0.5)
 
     header 
-        padding: 10px 0 10px 0
+        padding: 11px 0 11px 0
         display: flex
         flex-direction: row
         position: fixed
         top: 0
     
     header img
-        width: 25px
-        margin-right: 10px
-        height: 25px
+        width: 22px
+        margin-right: 7px
+        height: 22px
 
     header .widgetName
+        font-size: 13px
         line-height: 25px
     
     .weatherBox
@@ -116,54 +114,49 @@ style: """
         height: 100%
 
     .city
-        padding: 10px
+        padding: 10px 0px 0px 11px
         display: flex
         flex-direction: row
-       // border-top: 1px solid rgba(200,200,200,0.25)
 
     .city .leftBox
         width: 20%
-        padding: 0 12px 0 0
-        margin: 0 10px 0 0
- #        border-right: 2px solid
-        color: lightgray
+        padding: 0px 10px 10px 0px
+        margin: 0px 13px 0px 0px
         
     .leftBox img
-        margin-left: 25px
-        width: 45px
-        height: 45px
+        width: 63px
+        height: 55px
 
     .city .middleBox
         flex-grow: 1
     
     .middleBox .cityName
-        font-size: 20px
+        font-size: 18px
+        font-weight: 400
         line-height: 20px
-        font-weight: 300
 
     .middleBox .condition
-        font-size: 12px
+        font-size: 13px
         line-height: 20px
-        margin-top: 5px
-        color: rgba(200,200,200,0.9)
+        margin-top: 2px
 
-    .middleBox .rainChance
-        font-size: 12px
-        line-height: 12px
-        color: rgba(200,200,200,0.9)
+    .middleBox .clouds
+        width: 75%
+        font-size: 13px
+        line-height: 13px
 
     .city .rightBox
-        width: 20%
+        width: 30%
+        margin-right: 2px
         text-align:right
 
     .rightBox .temperature
-        font-size: 40px
-        line-height: 45px
+        font-size: 44px
+        line-height: 42px
         font-weight: 200
 
     .rightBox .wind
-        font-size: 12px
-        line-height: 12px
-        text-align: center
-        color: rgba(200,200,200,0.9)
+        font-size: 13px
+        line-height: 14px
+        text-align: right
 """

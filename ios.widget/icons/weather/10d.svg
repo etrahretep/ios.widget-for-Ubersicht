@@ -1,1 +1,32 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 237.78 255.29"><defs><style>.cls-1{fill:#dadbdf;}.cls-2{fill:#6bcff9;}</style></defs><title>10d</title><g id="shower"><path id="Cloudy" class="cls-1" d="M190.3,55.24l-8.13,1.49A64.87,64.87,0,1,0,54.74,80.1l-1.62.29a44,44,0,0,0,0,88H190.3a56.59,56.59,0,0,0,0-113.18Z" transform="translate(-9.11 -0.22)"/><rect class="cls-2" x="33.86" y="182.43" width="12.19" height="52.9" transform="translate(92.97 5.27) rotate(27.81)"/><rect class="cls-2" x="68.67" y="181.1" width="12.19" height="75.95" transform="translate(101.75 -9.8) rotate(27.81)"/><rect class="cls-2" x="112.06" y="181.62" width="12.19" height="66.94" transform="translate(104.91 -30.5) rotate(27.81)"/><rect class="cls-2" x="147.41" y="181.15" width="12.19" height="75.14" transform="translate(110.68 -46.58) rotate(27.81)"/><rect class="cls-2" x="188.78" y="182.53" width="12.19" height="51.31" transform="translate(110.54 -67.1) rotate(27.81)"/></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 250 209.2" style="enable-background:new 0 0 250 209.2;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.8;fill:#FFFFFF;enable-background:new    ;}
+	.st1{fill:#61C5F1;}
+</style>
+<g id="Layer_1">
+</g>
+<g id="Backgrounds">
+</g>
+<g id="iOS_UI_Kit">
+	<g id="XMLID_9_">
+		<path id="XMLID_16_" class="st0" d="M183.6,42.4c-1.8,0-3.6,0.1-5.4,0.3C171.1,18.1,148.4,0,121.5,0C88.8,0,62.4,26.4,62.4,59.1
+			c0,2.7,0.2,5.4,0.6,8C45.5,69.8,32.1,84.8,32.1,103c0,20.1,16.3,36.4,36.4,36.4h115.2c26.8,0,48.5-21.7,48.5-48.5
+			S210.4,42.4,183.6,42.4z"/>
+		<g id="XMLID_10_">
+			
+				<rect id="XMLID_15_" x="38.2" y="166" transform="matrix(0.5878 -0.809 0.809 0.5878 -114.2782 118.3515)" class="st1" width="41.7" height="10.6"/>
+			
+				<rect id="XMLID_14_" x="165.6" y="165.9" transform="matrix(0.5878 -0.809 0.809 0.5878 -61.6665 221.4024)" class="st1" width="41.7" height="10.6"/>
+			
+				<rect id="XMLID_13_" x="53.8" y="174.5" transform="matrix(0.5878 -0.809 0.809 0.5878 -110.221 143.3715)" class="st1" width="63.6" height="10.6"/>
+			
+				<rect id="XMLID_12_" x="93.7" y="172.2" transform="matrix(0.5878 -0.809 0.809 0.5878 -93.7237 171.0582)" class="st1" width="54.5" height="10.6"/>
+			
+				<rect id="XMLID_11_" x="118.6" y="174.5" transform="matrix(0.5878 -0.809 0.809 0.5878 -83.1228 196.4193)" class="st1" width="65.1" height="10.6"/>
+		</g>
+	</g>
+</g>
+</svg>

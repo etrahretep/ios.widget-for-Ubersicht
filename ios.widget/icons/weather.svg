@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#XMLID_6_);}
+	.st1{fill:url(#XMLID_7_);}
+	.st2{opacity:0.9;fill:#FFFFFF;enable-background:new    ;}
+</style>
+<g id="Laag_1_1_">
+</g>
+<g id="iOS_9.3_UI_Kit">
+	<g id="XMLID_1_">
+		
+			<linearGradient id="XMLID_6_" gradientUnits="userSpaceOnUse" x1="100" y1="202" x2="100" y2="2" gradientTransform="matrix(1 0 0 -1 0 202)">
+			<stop  offset="0" style="stop-color:#196EF0"/>
+			<stop  offset="1" style="stop-color:#19C8FA"/>
+		</linearGradient>
+		<path id="XMLID_4_" class="st0" d="M155,200H45c-24.85,0-45-20.15-45-45V45C0,20.15,20.15,0,45,0h110c24.85,0,45,20.15,45,45v110
+			C200,179.85,179.85,200,155,200z"/>
+	</g>
+	
+		<linearGradient id="XMLID_7_" gradientUnits="userSpaceOnUse" x1="65.8333" y1="158.6667" x2="65.8333" y2="83.6667" gradientTransform="matrix(1 0 0 -1 0 202)">
+		<stop  offset="0" style="stop-color:#FDC21A"/>
+		<stop  offset="1" style="stop-color:#FEE517"/>
+	</linearGradient>
+	<circle id="XMLID_2_" class="st1" cx="65.83" cy="80.83" r="37.5"/>
+	<path id="XMLID_3_" class="st2" d="M137.5,85c-0.65,0-1.27,0.05-1.9,0.1c-5.57-13.73-19.03-23.43-34.77-23.43
+		c-20.72,0-37.5,16.78-37.5,37.5c0,0.97,0.05,1.93,0.12,2.88C52.97,103.95,45,113.12,45,124.17c0,12.43,10.07,22.5,22.5,22.5h70
+		c17.03,0,30.83-13.8,30.83-30.83S154.53,85,137.5,85z"/>
+</g>
+</svg>
