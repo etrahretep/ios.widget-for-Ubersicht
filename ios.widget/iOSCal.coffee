@@ -38,7 +38,7 @@ update: (output, domEl) ->
 
 	for i in [0...lines.length]
 		name = lines[i].event[0];
-		location = lines[i].event[2] + " • " + lines[i].event[3]# + "<br>" + lines[i].event[4];
+		location = lines[i].event[2]# + "<br>" + lines[i].event[3] + "<br>" + lines[i].event[4];
 		if (location.includes('Locatie:'))
 			location = location.replace('Locatie:','') 
 			location = location.replace(/\\s/g, '')
@@ -51,7 +51,7 @@ update: (output, domEl) ->
 
 	inner = ''
 	inner += "<div id='calendar' class='#{mode}'>" 
-	inner += "<header><img src='ios.widget/icons/calendar.svg' alt='icon'></img><div class='widgetName'>AGENDA</div></header>"
+	inner += "<header><img src='ios.widget/icons/calendar.svg'></img><div class='widgetName'>AGENDA</div></header>"
 	today = []
 	tomorrow = []
 	dayaftertomorrow = []
@@ -86,14 +86,14 @@ update: (output, domEl) ->
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			tomorrow.push(lines[i].event)
 			continue
-		   
+
 		else if (lines[i].event.time.includes('overmorgen  om'))
 			lines[i].event.time = lines[i].event.time.replace("overmorgen  om ","")
 			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			dayaftertomorrow.push(lines[i].event)
 			continue
-						
+
 		else if(lines[i].event.time.includes('overmorgen ')&&!lines[i].event.time.includes('om'))
 			lines[i].event.time = lines[i].event.time.replace("overmorgen  ","")
 			lines[i].event.time = "hele dag - "
@@ -102,10 +102,11 @@ update: (output, domEl) ->
 			dayaftertomorrow.push(lines[i].event)
 			continue
 
+
 	inner += "<div class='mainBox'>" 
 	inner += "<div class='today eventBox'>"   
 	if today.length > 0
-		inner += "<div class='day'></div>"
+		inner += "<div class='today'></div>"
 		for i in [0...today.length]
 			name = today[i].name
 			
@@ -126,11 +127,11 @@ update: (output, domEl) ->
 			inner += "</div><div class='location'>"
 			inner += loc
 			inner += "</div></div></div>"
-#	else    inner += "<div class='nothing'>Geen activiteiten vandaag</div>"
+	else    inner += "<div class='nothing'>Geen activiteiten</div>"
 	
 	inner += "</div>"
-
 	inner += "<div class='tomorrow eventBox'>"
+
 	if tomorrow.length > 0
 		inner += "<div class='day'>MORGEN</div>"
 		for i in [0...tomorrow.length]
@@ -186,27 +187,31 @@ update: (output, domEl) ->
 	inner += "</div>"
 
 	$(calendar).html(inner)
-	
+
+	div = document.getElementsByTagName('div')[0]
+	div.innerHTML = div.innerHTML.replace(/􀑉/g, (match) -> '<n style=color:rgb(252,62,48)>' + match + '</n>')
+
 style: """
-    color: rgb(235,235,235)
+    color: rgb(225,225,225)
     font-family: SF Pro Display
     font-weight: 300
     width: 100%
     position: absolute
-    top: calc(33% + 148px)
+    top: calc(33% + 158px)
     letter-spacing: 0.875px
+//    transform: scale(1)
 
     #calendar
         border-radius: 13px
         -webkit-backdrop-filter: blur(25px)
         width: 359px
-        max-height: 500px
+        max-height: 450px
         height: dynamic
         position: absolute
         top: 0
         left: 50%
         transform: translate(-50%,0)
-        padding: 40px 0px 20px 15px
+        padding: 50px 0px 20px 15px
 
     #calendar.light
         background-color: rgba(255,255,255,0.5)
@@ -214,13 +219,21 @@ style: """
 
     #calendar.light header, #calendar.light .leftBox .time .to, #calendar.light .rightBox .location, #calendar.light .nothing, #calendar.light .day
         color: rgba(0,0,0,0.5)
+    #calendar.light .event
+        border-bottom: 0.25px solid rgba(0,0,0,0.15)
+    #calendar.light .event:last-child
+        border-bottom: none
 
     #calendar.dark
         background-color: rgba(0,0,0,0.25)
 
     #calendar.dark header, #calendar.dark .leftBox .time .to, #calendar.dark .rightBox .location, #calendar.dark .nothing, #calendar.dark .day
-        color: rgba(255,255,255,0.5)
-
+        color: rgba(255,255,255,0.5) 
+    #calendar.dark .event
+        border-bottom: 0.25px solid rgba(255,255,255,0.25)
+    #calendar.dark .event:last-child
+        border-bottom: none
+        
     header 
         padding: 11px 0 11px 0
         display: flex
@@ -236,16 +249,20 @@ style: """
 
     header .widgetName
         font-size: 13px
-        line-height: 25px
+        line-height: 24px
 
     .mainBox
         overflow-y: scroll
         height: 100%
-        max-height: 500px
+        max-height: 450px
 
     .eventBox
         display: flex
         flex-direction: column
+
+    .today
+        font-size: 13px
+        margin-top: 9px
 
     .day
         padding: 0 0 0 24px
@@ -259,34 +276,36 @@ style: """
     .event
         display: flex
         flex-direction: row
-        border-top: 0.25px solid rgba(128,128,128,0.5)
 
     .event .title
+        overflow: hidden
+        max-width: 25ch
         padding: 2px 0 0 1px
         font-size: 17px
         line-height: 24px
-        
+
     .event .leftBox
-        width: 17.5%
-        min-height: 45px
-        padding: 0 2px 0 0
-        margin: 2px 9.5px 2px 6px
+        width: 17.65%
+        min-height: 45.75px
+        margin: 2px 10px 2px 7.5px
         border-right: 2px solid
 
     .leftBox .time
         text-align: right
 
     .leftBox .time .from
-        padding: 3px 12px 0 0
+        padding: 3px 14px 0 0
         font-size: 12px;
         line-height: 22px
 
     .leftBox .time .to
-        padding: 0 12px 0 0
+        padding: 0 14px 0 0
         font-size: 12px;
         line-height: 20px
 
     .rightBox .location
+        overflow: hidden
+        max-width: 35ch
         padding: 3px 0 0 1px
         font-size: 12px
         line-height: 17px
@@ -294,6 +313,6 @@ style: """
     .nothing 
         font-size: 17px
         text-align: center
-        margin-top: 25px
-        margin-bottom: 15px
+        margin-top: 20px
+        margin-bottom: 20px
 """

@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 24.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 250 212.1" style="enable-background:new 0 0 250 212.1;" xml:space="preserve">
+	 viewBox="0 0 250 209.2" style="enable-background:new 0 0 250 209.2;" xml:space="preserve">
 <style type="text/css">
 	.st0{opacity:0.8;fill:#FFFFFF;enable-background:new    ;}
 	.st1{fill:#61C5F1;}
 </style>
 <g id="Layer_1">
 </g>
+<g id="Backgrounds">
+</g>
 <g id="iOS_UI_Kit">
-	<path id="XMLID_383_" class="st0" d="M183.6,42.4c-1.8,0-3.6,0.1-5.4,0.3C171.1,18.1,148.4,0,121.5,0C88.8,0,62.4,26.5,62.4,59.1
-		c0,2.7,0.2,5.4,0.6,8C45.5,69.8,32.1,84.8,32.1,103c0,20.1,16.3,36.4,36.4,36.4h115.2c26.8,0,48.5-21.7,48.5-48.5
-		S210.4,42.4,183.6,42.4z"/>
-	
-		<rect id="XMLID_384_" x="38.2" y="166" transform="matrix(0.5878 -0.809 0.809 0.5878 -114.2702 118.3486)" class="st1" width="41.7" height="10.6"/>
-	
-		<rect id="XMLID_385_" x="104.9" y="168.7" transform="matrix(0.5879 -0.809 0.809 0.5879 -87.57 176.2009)" class="st1" width="48.5" height="10.6"/>
-	
-		<rect id="XMLID_386_" x="135.7" y="175.1" transform="matrix(0.5878 -0.809 0.809 0.5878 -76.8967 209.9341)" class="st1" width="63.6" height="10.6"/>
-	
-		<rect id="XMLID_387_" x="62.5" y="183.5" transform="matrix(0.588 -0.8089 0.8089 0.588 -116.6188 148.5819)" class="st1" width="50" height="10.6"/>
-	
-		<rect id="XMLID_388_" x="190.4" y="188" transform="matrix(0.5879 -0.809 0.809 0.5879 -74.1503 240.9988)" class="st1" width="18.2" height="10.6"/>
+	<g id="XMLID_9_">
+		<path id="XMLID_16_" class="st0" d="M183.6,42.4c-1.8,0-3.6,0.1-5.4,0.3C171.1,18.1,148.4,0,121.5,0C88.8,0,62.4,26.4,62.4,59.1
+			c0,2.7,0.2,5.4,0.6,8C45.5,69.8,32.1,84.8,32.1,103c0,20.1,16.3,36.4,36.4,36.4h115.2c26.8,0,48.5-21.7,48.5-48.5
+			S210.4,42.4,183.6,42.4z"/>
+		<g id="XMLID_10_">
+			
+				<rect id="XMLID_15_" x="38.2" y="166" transform="matrix(0.5878 -0.809 0.809 0.5878 -114.2782 118.3515)" class="st1" width="41.7" height="10.6"/>
+			
+				<rect id="XMLID_14_" x="165.6" y="165.9" transform="matrix(0.5878 -0.809 0.809 0.5878 -61.6665 221.4024)" class="st1" width="41.7" height="10.6"/>
+			
+				<rect id="XMLID_13_" x="53.8" y="174.5" transform="matrix(0.5878 -0.809 0.809 0.5878 -110.221 143.3715)" class="st1" width="63.6" height="10.6"/>
+			
+				<rect id="XMLID_12_" x="93.7" y="172.2" transform="matrix(0.5878 -0.809 0.809 0.5878 -93.7237 171.0582)" class="st1" width="54.5" height="10.6"/>
+			
+				<rect id="XMLID_11_" x="118.6" y="174.5" transform="matrix(0.5878 -0.809 0.809 0.5878 -83.1228 196.4193)" class="st1" width="65.1" height="10.6"/>
+		</g>
+	</g>
 </g>
 </svg>

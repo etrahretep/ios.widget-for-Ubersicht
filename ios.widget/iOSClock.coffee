@@ -52,8 +52,9 @@ style: (->
     font-weight: 200
     letter-spacing: 0.875px
     width: 100%
-    height: 33%
+    top: 33%
     text-shadow: 1px 1px 5px rgba(0,0,0,0.10)   
+//    transform: scale(1)
 
     #simpleClock
       font-size: 85px
@@ -70,5 +71,9 @@ style: (->
       font-size: 23px
       font-weight: 400
       padding-bottom: 10px
+
+	.date:first-letter
+      text-transform: uppercase
+
   """
 )()

@@ -1,17 +1,17 @@
 mode = "light"
 
 apiKey = "195785bd2dd750dca8ceb2ad990b904d"
-
 cityList = "2759821,2751316"
-
 units = "metric"
-
 lang = "nl"
+lat = "52.1994"
+lon = "5.374"
 
 command: "ios.widget/weather.sh"
 
-#command: "curl -s 'http://api.openweathermap.org/data/2.5/group?id=#{cityList}&lang=#{lang}&units=#{units}&appid=#{apiKey}'"
-#http://api.openweathermap.org/data/2.5/group?id=2759821,2751316&lang=nl&units=metric&appid=195785bd2dd750dca8ceb2ad990b904d
+#lat=35&lon=139
+#command: "curl -s 'http://api.openweathermap.org/data/2.5/group?lat=#{lat}&lon=#{lon}&id=#{cityList}&lang=#{lang}&units=#{units}&appid=#{apiKey}'"
+#http://api.openweathermap.org/data/2.5/group?lat=52.1994&lon=5.374&id=2759821,2751316&lang=nl&units=metric&appid=195785bd2dd750dca8ceb2ad990b904d
 
 refreshFrequency: '5m'
 
@@ -61,13 +61,14 @@ update: (output, domEl) ->
     $(weather).html(inner)
     
 style: """
-    color: rgb(235,235,235)
+    color: rgb(225,225,225)
     font-family: SF Pro Display
     font-weight: 300
     width: 100%
     position: absolute
     top: 33%
     letter-spacing: 0.875px
+//    transform: scale(1)
     
     #weather
         border-radius: 13px
@@ -78,7 +79,7 @@ style: """
         top: 0
         left 50%
         transform: translate(-50%,0)
-        padding: 40px 15px 20px 10px
+        padding: 50px 15px 20px 10px
 
     #weather.light
         background-color: rgba(255,255,255,0.5)
@@ -107,7 +108,7 @@ style: """
 
     header .widgetName
         font-size: 13px
-        line-height: 25px
+        line-height: 24px
     
     .weatherBox
         overflow-y: scroll
