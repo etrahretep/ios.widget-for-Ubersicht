@@ -16,7 +16,7 @@ command: "ios.widget/cal.sh"
 refreshFrequency: '5m'
 
 render: (output) ->"""<div id='calendar'>"""
-	
+
 update: (output, domEl) ->
 	[Interface] = output.split(/[\r\n]+/g)
 	if Interface is "Dark" then mode = "dark" else mode = "light"
@@ -43,7 +43,7 @@ update: (output, domEl) ->
 			location = location.replace('Locatie:','') 
 			location = location.replace(/\\s/g, '')
 		else location = ''
-		
+
 		time = lines[i].event[1];
 		if (time.includes(''))
 			time = time.replace('', '')
@@ -108,10 +108,10 @@ update: (output, domEl) ->
 		inner += "<div class='today'></div>"
 		for i in [0...today.length]
 			name = today[i].name
-			
+
 			calendarName = name.match(/\([a-zA-Z0-9\/\s]*?\)$/gmi)
 			calendarName = calendarName[0].replace(/[\(-\)]+/gm,"")
-			
+
 			calendarColor = getCalendarColor(calendarName)
 
 			name = name.replace(/\([a-zA-Z0-9\/\s]*?\)$/gmi, "")
@@ -135,12 +135,12 @@ update: (output, domEl) ->
 		inner += "<div class='day'>MORGEN</div>"
 		for i in [0...tomorrow.length]
 			name = tomorrow[i].name
-			
+
 			calendarName = name.match(/\([a-zA-Z0-9\/\s]*?\)$/gmi)
 			calendarName = calendarName[0].replace(/[\(-\)]+/gm,"")
-			
+
 			calendarColor = getCalendarColor(calendarName)
-			
+
 			name = name.replace(/\([a-zA-Z0-9\/\s]*?\)$/gmi, "")
 			loc = tomorrow[i].location
 			time = tomorrow[i].time
@@ -154,7 +154,7 @@ update: (output, domEl) ->
 			inner += loc
 			inner += "</div></div></div>"
 	else    inner += "<div class='nothing'>Geen activiteiten morgen</div>"
-	
+
 	inner += "</div>"
 	inner += "<div class='dayaftertomorrow eventBox'>"
 
@@ -162,10 +162,10 @@ update: (output, domEl) ->
 		inner += "<div class='day'>OVERMORGEN </div>"
 		for i in [0...dayaftertomorrow.length]
 			name = dayaftertomorrow[i].name
-		   
+
 			calendarName = name.match(/\([a-zA-Z0-9\/\s]*?\)$/gmi)
 			calendarName = calendarName[0].replace(/[\(-\)]+/gm,"")
-			
+
 			calendarColor = getCalendarColor(calendarName)
 
 			name = name.replace(/\([a-zA-Z0-9\/\s]*?\)$/gmi, "")
@@ -181,7 +181,7 @@ update: (output, domEl) ->
 			inner += loc
 			inner += "</div></div></div>"
 	else	inner += "<div class='nothing'>Geen activiteiten overmorgen</div>"
-	
+
 	inner += "</div>"
 	inner += "</div>"
 
@@ -240,7 +240,7 @@ style: """
         position: fixed
         top: 0
         left: 10px
-    
+
     header img
         width: 22px
         margin-right: 7px

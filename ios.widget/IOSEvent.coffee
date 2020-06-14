@@ -3,21 +3,6 @@ options =
 
 command: "ios.widget/event.sh"
 refreshFrequency: '59s'
-style: """
-    overflow: hidden
-    max-width: 36ch
-    color: rgba(0,0,0,0.9)
-    font-family: SF Pro Display
-    font-weight: 300
-    font-size: 12px
-    letter-spacing: 0.875px
-    line-height: 17px
-    top: calc(33% + 173px)
-    right: calc(50% - 170px)
-//    transform: scale(1)
-text-align: right
-z-index: 1
-"""
 
 render: (output) ->
 
@@ -60,3 +45,19 @@ update: (output, domEl) ->
       div.find('.meta').css('display', 'block')
     else
       div.find('.meta').css('display', 'none')
+
+style: """
+    overflow: hidden
+    max-width: 36ch
+    color: rgba(0,0,0,0.9)
+    font-family: SF Pro Display
+    font-weight: 300
+    font-size: 12px
+    letter-spacing: 0.875px
+    line-height: 17px
+    top: calc(33% + 173px)
+    right: calc(50% - 170px)
+//    transform: scale(1)
+text-align: right
+z-index: 1
+"""

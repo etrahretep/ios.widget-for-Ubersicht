@@ -29,9 +29,8 @@ update: (output, domEl) ->
     inner = ''
     inner += "<div id='weather' class='#{mode}'>" 
     inner += "<header><img src='ios.widget/icons/weather.svg' alt='icon'></img><div class='widgetName'>WEER</div></header>"
-
     inner += "<div class='weatherBox'>" 
-    
+
     for i in [0...weatherData.cnt]
         city = weatherData.list[i].name
         condition = weatherData.list[i].weather[0].description
@@ -55,11 +54,11 @@ update: (output, domEl) ->
         inner += " km/u</div></div></div>"
 
         console.log(city + condition + temperature)
-    
+
     inner += "</div>"
 
     $(weather).html(inner)
-    
+
 style: """
     color: rgb(225,225,225)
     font-family: SF Pro Display
@@ -69,7 +68,7 @@ style: """
     top: 33%
     letter-spacing: 0.875px
 //    transform: scale(1)
-    
+
     #weather
         border-radius: 13px
         -webkit-backdrop-filter: blur(25px)
@@ -100,7 +99,7 @@ style: """
         flex-direction: row
         position: fixed
         top: 0
-    
+
     header img
         width: 22px
         margin-right: 7px
@@ -109,7 +108,7 @@ style: """
     header .widgetName
         font-size: 13px
         line-height: 24px
-    
+
     .weatherBox
         overflow-y: scroll
         height: 100%
@@ -123,14 +122,14 @@ style: """
         width: 20%
         padding: 0px 10px 10px 0px
         margin: 0px 13px 0px 0px
-        
+
     .leftBox img
         width: 63px
         height: 55px
 
     .city .middleBox
         flex-grow: 1
-    
+
     .middleBox .cityName
         font-size: 18px
         font-weight: 400

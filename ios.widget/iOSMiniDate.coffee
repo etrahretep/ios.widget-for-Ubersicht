@@ -1,36 +1,31 @@
-dateOptions =
-  showDate: true
-  date: '%A'
+dateOptions = showDate: true
 
-format = (->
-    dateOptions.date + '\n' +'%e'
+command: "LC_TIME='nl_NL.UTF-8' date +'%A \n %e'"
 
-)()
-
-command: "LC_TIME='nl_NL.UTF-8' date +\"#{format}\""
-
-refreshFrequency: '1m'
+refreshFrequency: '1h'
 
 dateOptions: dateOptions
 
 render: (output) ->
-	"""<div id='miniDate'>#{output}</div>"""
+	"<div id='miniDate'>#{output}</div>"
+
 update: (output) ->
   if this.dateOptions.showDate
     data = output.split('\n')
 
-    html = ""
-    html += '<div class="minidate">'
-    html += data[0]
-    html += '</div>'
-    html += data[1]
+    inner = ""
+    inner += '<div class="minidate">'
+    inner += data[0]
+    inner += '</div>'
+    inner += data[1]
 
-  $(miniDate).html(html)
+  $(miniDate).html(inner)
 
 style: """
+    color: black
     font-family: SF Pro Display
     font-weight: 200
-    font-size: 13px
+    font-size: 14px
     text-align: center
     letter-spacing: 0.25px
     width: 100%
@@ -44,12 +39,12 @@ style: """
       width: 22px
       height: 22px
       position: absolute
-    
+
     .minidate
       color: red
       font-size: 4px
-      margin-top: 2px
-      margin-bottom: -1.5px
+      margin-top: 1.9px
+      margin-bottom: -1.6px
 
 	.minidate:first-letter
       text-transform: uppercase

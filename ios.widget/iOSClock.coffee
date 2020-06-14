@@ -1,27 +1,13 @@
 dateOptions =
-  # display not only 'time' also 'date'
   showDate: true
-  # format of 'date'
-  date: '%A %e %B'
 
-format = (->
-  if dateOptions.showDate
-    dateOptions.date + '\n' +'%H:%M '
-  else
-    '%H:%M:%S'
-)()
+command: "LC_TIME='nl_NL.UTF-8' date +'%A %e %B \n %H:%M'"
 
-style: """
-@import url(ios.widget/IOS.css)"""
-
-command: "LC_TIME='nl_NL.UTF-8' date +\"#{format}\""
-
-refreshFrequency: '1m'
+refreshFrequency: '59s'
 
 dateOptions: dateOptions
 
-render: (output) ->
-	"""<div id='simpleClock'>#{output}</div>"""
+render: (output) ->"<div id='simpleClock'>#{output}</div>"
 update: (output) ->
   if this.dateOptions.showDate
     data = output.split('\n')
@@ -34,19 +20,9 @@ update: (output) ->
     html += data[0]
     html += '</div>'
 
-  else
-    html = output
-
   $(simpleClock).html(html)
 
-style: (->
-  fontSize = '7em'
-  width = 'auto'
-  transform = 'auto'
-  bottom = '3%'
-  top = 'auto'    
-
-  return """
+style: """
     color: white
     font-family: SF Pro Display
     font-weight: 200
@@ -63,17 +39,15 @@ style: (->
       bottom 0
       left 50%
       transform: translate(-50%,0)
-    
+
     #simpleClock .clock
       margin-bottom: -5px
 
     #simpleClock .date
       font-size: 23px
-      font-weight: 400
+      font-weight: 300
       padding-bottom: 10px
 
 	.date:first-letter
       text-transform: uppercase
-
   """
-)()
