@@ -102,7 +102,6 @@ update: (output, domEl) ->
 			dayaftertomorrow.push(lines[i].event)
 			continue
 
-
 	inner += "<div class='mainBox'>" 
 	inner += "<div class='today eventBox'>"   
 	if today.length > 0
@@ -278,6 +277,8 @@ style: """
         flex-direction: row
 
     .event .title
+        text-overflow: ellipsis
+        white-space: nowrap
         overflow: hidden
         max-width: 25ch
         padding: 2px 0 0 1px
@@ -304,6 +305,8 @@ style: """
         line-height: 20px
 
     .rightBox .location
+        text-overflow: ellipsis
+        white-space: nowrap
         overflow: hidden
         max-width: 35ch
         padding: 3px 0 0 1px
