@@ -127,7 +127,7 @@ update: (output, domEl) ->
 			inner += loc
 			inner += "</div></div></div>"
 	else    inner += "<div class='nothing'>Geen activiteiten</div>"
-	
+
 	inner += "</div>"
 	inner += "<div class='tomorrow eventBox'>"
 
@@ -187,8 +187,8 @@ update: (output, domEl) ->
 
 	$(calendar).html(inner)
 
-	div = document.getElementsByTagName('div')[0]
-	div.innerHTML = div.innerHTML.replace(/􀑉/g, (match) -> '<n style=color:rgb(252,62,48)>' + match + '</n>')
+	birthdaygift = document.getElementById('calendar')
+	birthdaygift.innerHTML = birthdaygift.innerHTML.replace(/􀑉/g, (match) -> '<n style=color:rgb(252,62,48)>' + match + '</n>')
 
 style: """
     color: rgb(225,225,225)
@@ -232,7 +232,7 @@ style: """
         border-bottom: 0.25px solid rgba(255,255,255,0.25)
     #calendar.dark .event:last-child
         border-bottom: none
-        
+
     header 
         padding: 11px 0 11px 0
         display: flex
