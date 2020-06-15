@@ -6,15 +6,14 @@ refreshFrequency: '1h'
 
 dateOptions: dateOptions
 
-render: (output) ->
-	"<div id='miniDate'>#{output}</div>"
+render: (output) ->"<div id='miniDate'>#{output}</div>"
 
 update: (output) ->
   if this.dateOptions.showDate
     data = output.split('\n')
 
     inner = ""
-    inner += '<div class="minidate">'
+    inner += '<div class="date">'
     inner += data[0]
     inner += '</div>'
     inner += data[1]
@@ -25,7 +24,6 @@ style: """
     color: black
     font-family: SF Pro Display
     font-weight: 200
-    font-size: 14px
     text-align: center
     letter-spacing: 0.25px
     width: 100%
@@ -34,18 +32,19 @@ style: """
     z-index: 1
 
     #miniDate
+      font-size: 14px
       background-color: white
       border-radius: 5px
       width: 22px
       height: 22px
       position: absolute
 
-    .minidate
+    #miniDate .date
       color: red
       font-size: 4px
       margin-top: 1.9px
       margin-bottom: -1.6px
 
-	.minidate:first-letter
+    #miniDate .minidate:first-letter
       text-transform: uppercase
   """
