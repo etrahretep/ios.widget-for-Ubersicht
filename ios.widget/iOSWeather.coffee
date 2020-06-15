@@ -15,8 +15,7 @@ command: "ios.widget/weather.sh"
 
 refreshFrequency: '5m'
 
-render: (output) ->
-    """<div id='weather'>"""
+render: (output) -> "<div id='weather'>"
 
 update: (output, domEl) ->
 

@@ -6,7 +6,7 @@ refreshFrequency: '59s'
 
 dateOptions: dateOptions
 
-render: (output) ->"<div id='simpleClock'>#{output}</div>"
+render: (output) -> "<div id='simpleClock'>#{output}</div>"
 
 update: (output) ->
   if this.dateOptions.showDate
@@ -16,9 +16,9 @@ update: (output) ->
     inner += "<div class='clock'>"
     inner += data[1]
     inner += "</div>"
-    inner += '<div class="date">'
+    inner += "<div class='date'>"
     inner += data[0]
-    inner += '</div>'
+    inner += "</div>"
 
   $(simpleClock).html(inner)
 

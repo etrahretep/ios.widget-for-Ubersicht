@@ -15,7 +15,7 @@ command: "ios.widget/cal.sh"
 
 refreshFrequency: '5m'
 
-render: (output) ->"""<div id='calendar'>"""
+render: (output) -> "<div id='calendar'>"
 
 update: (output, domEl) ->
 	[Interface] = output.split(/[\r\n]+/g)
@@ -49,9 +49,18 @@ update: (output, domEl) ->
 			time = time.replace('', '')
 		lines[i].event = {"name":name,"time":time,"location":location}
 
-	inner = ''
+	data = output.slice(-15,-1).split('^')
+
+	inner = ""
 	inner += "<div id='calendar' class='#{mode}'>" 
-	inner += "<header><img src='ios.widget/icons/calendar.svg'></img><div class='widgetName'>AGENDA</div></header>"
+	inner += "<header><div class='widgetName'>AGENDA</header>"
+	inner += "<div class='miniDate'>"
+	inner += "<div class='idate'>"
+	inner += data[0]
+	inner += "<div class='iDate'>"
+	inner += data[1]
+	inner += "</div></div></div>"
+
 	today = []
 	tomorrow = []
 	dayaftertomorrow = []
@@ -239,16 +248,36 @@ style: """
         flex-direction: row
         position: fixed
         top: 0
-        left: 10px
-
-    header img
-        width: 22px
-        margin-right: 7px
-        height: 22px
 
     header .widgetName
+        margin-left: 24px
         font-size: 13px
         line-height: 24px
+
+    .miniDate
+        background-color: white
+        border-radius: 5px
+        width: 22px
+        height: 22px
+        margin-top: -39px
+        margin-left: -5px
+        text-align: center
+        letter-spacing: 0.25px
+        margin-bottom: 17px
+
+    .miniDate .iDate
+        padding: 1px
+        color: black
+        font-size: 14px
+
+    .miniDate .idate
+        color: red
+        font-size: 4px
+        font-weight: 200
+        line-height: 9px
+
+    .miniDate .idate:first-letter
+        text-transform: uppercase
 
     .mainBox
         overflow-y: scroll
