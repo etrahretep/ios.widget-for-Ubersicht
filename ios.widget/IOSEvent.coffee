@@ -1,7 +1,5 @@
-options =
-  widgetEnable: true
-
 command: "ios.widget/event.sh"
+
 refreshFrequency: '59s'
 
 render: (output) ->
@@ -55,7 +53,7 @@ style: """
     font-size: 12px
     letter-spacing: 0.875px
     line-height: 17px
-    top: calc(33% + 173px)
+    top: calc(30% + 180px)
     right: calc(50% - 170px)
 //    transform: scale(1)
 text-align: right

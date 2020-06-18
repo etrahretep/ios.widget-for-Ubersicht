@@ -13,11 +13,11 @@ defColor = "white"
 
 command: "ios.widget/cal.sh"
 
-refreshFrequency: '5m'
+refreshFrequency: '1m'
 
 render: (output) -> "<div id='calendar'>"
 
-update: (output, domEl) ->
+update: (output) ->
 	[Interface] = output.split(/[\r\n]+/g)
 	if Interface is "Dark" then mode = "dark" else mode = "light"
 
@@ -25,7 +25,6 @@ update: (output, domEl) ->
 		for i in calendars
 			if i.name == calendarName
 				return i.color
-
 		return defColor
 
 	lines = output.split('• ')
@@ -38,7 +37,7 @@ update: (output, domEl) ->
 
 	for i in [0...lines.length]
 		name = lines[i].event[0];
-		location = lines[i].event[2]# + "<br>" + lines[i].event[3] + "<br>" + lines[i].event[4];
+		location = lines[i].event[2]# + "<br>" + lines[i].event[3];
 		if (location.includes('Locatie:'))
 			location = location.replace('Locatie:','') 
 			location = location.replace(/\\s/g, '')
@@ -49,16 +48,18 @@ update: (output, domEl) ->
 			time = time.replace('', '')
 		lines[i].event = {"name":name,"time":time,"location":location}
 
-	data = output.slice(-15,-1).split('^')
+	date = new Date();
+	options = { weekday: 'long', day: 'numeric'};
+	date = (date.toLocaleDateString('nl-NL', options)).split(' ')
 
 	inner = ""
 	inner += "<div id='calendar' class='#{mode}'>" 
 	inner += "<header><div class='widgetName'>AGENDA</header>"
 	inner += "<div class='miniDate'>"
 	inner += "<div class='idate'>"
-	inner += data[0]
+	inner += date[0]
 	inner += "<div class='iDate'>"
-	inner += data[1]
+	inner += date[1]
 	inner += "</div></div></div>"
 
 	today = []
@@ -68,7 +69,7 @@ update: (output, domEl) ->
 	for i in [0...lines.length]
 		if (lines[i].event.time.includes('vandaag om'))
 			lines[i].event.time = lines[i].event.time.replace("vandaag om ","")
-			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
+			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i,"")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			today.push(lines[i].event)
 			continue
@@ -81,16 +82,16 @@ update: (output, domEl) ->
 			today.push(lines[i].event)
 			continue
 
-		else if(lines[i].event.time.includes('morgen om')&&!lines[i].event.time.includes('day')&&!lines[i].event.time.includes('over'))
+		else if(lines[i].event.time.includes('morgen om')&&!lines[i].event.time.includes('over '))
 			lines[i].event.time = lines[i].event.time.replace("morgen om ","")
 			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			tomorrow.push(lines[i].event)
 			continue
 
-		else if(lines[i].event.time.includes('morgen')&&!lines[i].event.time.includes('om')&&!lines[i].event.time.includes('over'))
-			lines[i].event.time = lines[i].event.time.replace("morgen ","")
-			lines[i].event.time = "hele dag - "
+		else if(lines[i].event.time.includes('morgen')&&!lines[i].event.time.includes('om')&&!lines[i].event.time.includes('over '))
+			lines[i].event.time = lines[i].event.time.replace("morgen ","hele dag ")
+#			lines[i].event.time = "hele dag - "
 			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			tomorrow.push(lines[i].event)
@@ -104,12 +105,20 @@ update: (output, domEl) ->
 			continue
 
 		else if(lines[i].event.time.includes('overmorgen ')&&!lines[i].event.time.includes('om'))
-			lines[i].event.time = lines[i].event.time.replace("overmorgen  ","")
-			lines[i].event.time = "hele dag - "
+			lines[i].event.time = lines[i].event.time.replace("overmorgen  ","hele dag ")
+#			lines[i].event.time = "hele dag - "
 			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			dayaftertomorrow.push(lines[i].event)
 			continue
+
+
+#	dt = new Date()
+#	dt = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+#	console.log dt
+	
+#	nn = Number(new Date)
+#	console.log nn
 
 	inner += "<div class='mainBox'>" 
 	inner += "<div class='today eventBox'>"   
@@ -117,81 +126,74 @@ update: (output, domEl) ->
 		inner += "<div class='today'></div>"
 		for i in [0...today.length]
 			name = today[i].name
-
 			calendarName = name.match(/\([a-zA-Z0-9\/\s]*?\)$/gmi)
-			calendarName = calendarName[0].replace(/[\(-\)]+/gm,"")
-
+			calendarName = calendarName[0].replace(/[\(-\)]+/gm,'')
 			calendarColor = getCalendarColor(calendarName)
-
-			name = name.replace(/\([a-zA-Z0-9\/\s]*?\)$/gmi, "")
+			name = name.replace(/\([a-zA-Z0-9\/\s]*?\)$/gmi, '')
 			loc = today[i].location
 			time = today[i].time
 			inner += "<div class='event'><div class='leftBox' style=' border-color: #{calendarColor}'><div class='time'><div class='from'>"
 			inner += time[0]
 			inner += "</div><div class='to'>"
 			inner += time[1]
-			inner += "</div></div></div><div class='rightBox'><div class='title'>"
+			inner += "</div></div></div><div class='middleBox'><div class='title'>"
 			inner += name
 			inner += "</div><div class='location'>"
 			inner += loc
+			inner += "</div></div><div class='rightBox'><div>"
+			inner += ''
 			inner += "</div></div></div>"
 	else    inner += "<div class='nothing'>Geen activiteiten</div>"
-
 	inner += "</div>"
-	inner += "<div class='tomorrow eventBox'>"
 
+	inner += "<div class='tomorrow eventBox'>"
 	if tomorrow.length > 0
 		inner += "<div class='day'>MORGEN</div>"
 		for i in [0...tomorrow.length]
 			name = tomorrow[i].name
-
 			calendarName = name.match(/\([a-zA-Z0-9\/\s]*?\)$/gmi)
-			calendarName = calendarName[0].replace(/[\(-\)]+/gm,"")
-
+			calendarName = calendarName[0].replace(/[\(-\)]+/gm,'')
 			calendarColor = getCalendarColor(calendarName)
-
-			name = name.replace(/\([a-zA-Z0-9\/\s]*?\)$/gmi, "")
+			name = name.replace(/\([a-zA-Z0-9\/\s]*?\)$/gmi, '')
 			loc = tomorrow[i].location
 			time = tomorrow[i].time
 			inner += "<div class='event'><div class='leftBox' style=' border-color: #{calendarColor}'><div class='time'><div class='from'>"
 			inner += time[0]
 			inner += "</div><div class='to'>"
 			inner += time[1]
-			inner += "</div></div></div><div class='rightBox'><div class='title'>"
+			inner += "</div></div></div><div class='middleBox'><div class='title'>"
 			inner += name
 			inner += "</div><div class='location'>"
 			inner += loc
+			inner += "</div></div><div class='rightBox'><div>"
+			inner += ''
 			inner += "</div></div></div>"
 	else    inner += "<div class='nothing'>Geen activiteiten morgen</div>"
-
 	inner += "</div>"
-	inner += "<div class='dayaftertomorrow eventBox'>"
 
+	inner += "<div class='dayaftertomorrow eventBox'>"
 	if dayaftertomorrow.length > 0
 		inner += "<div class='day'>OVERMORGEN </div>"
 		for i in [0...dayaftertomorrow.length]
 			name = dayaftertomorrow[i].name
-
 			calendarName = name.match(/\([a-zA-Z0-9\/\s]*?\)$/gmi)
-			calendarName = calendarName[0].replace(/[\(-\)]+/gm,"")
-
+			calendarName = calendarName[0].replace(/[\(-\)]+/gm,'')
 			calendarColor = getCalendarColor(calendarName)
-
-			name = name.replace(/\([a-zA-Z0-9\/\s]*?\)$/gmi, "")
+			name = name.replace(/\([a-zA-Z0-9\/\s]*?\)$/gmi, '')
 			loc = dayaftertomorrow[i].location
 			time = dayaftertomorrow[i].time
 			inner += "<div class='event'><div class='leftBox' style=' border-color: #{calendarColor}'><div class='time'><div class='from'>"
 			inner += time[0]
 			inner += "</div><div class='to'>"
 			inner += time[1]
-			inner += "</div></div></div><div class='rightBox'><div class='title'>"
+			inner += "</div></div></div><div class='middleBox'><div class='title'>"
 			inner += name
 			inner += "</div><div class='location'>"
 			inner += loc
+			inner += "</div></div><div class='rightBox'><div>"
+			inner += ''
 			inner += "</div></div></div>"
 	else	inner += "<div class='nothing'>Geen activiteiten overmorgen</div>"
-
-	inner += "</div>"
 	inner += "</div>"
 
 	$(calendar).html(inner)
@@ -205,7 +207,7 @@ style: """
     font-weight: 300
     width: 100%
     position: absolute
-    top: calc(33% + 158px)
+    top: calc(30% + 165px)
     letter-spacing: 0.875px
 //    transform: scale(1)
 
@@ -214,18 +216,18 @@ style: """
         -webkit-backdrop-filter: blur(25px)
         width: 359px
         max-height: 450px
-        height: dynamic
+        height: flex
         position: absolute
         top: 0
         left: 50%
         transform: translate(-50%,0)
-        padding: 50px 0px 20px 15px
+        padding: 50px 0px 25px 15px
 
     #calendar.light
         background-color: rgba(255,255,255,0.5)
         color: rgba(0,0,0,0.9)
 
-    #calendar.light header, #calendar.light .leftBox .time .to, #calendar.light .rightBox .location, #calendar.light .nothing, #calendar.light .day
+    #calendar.light header, #calendar.light .leftBox .time .to, #calendar.light .event .rightBox, #calendar.light .middleBox .location, #calendar.light .nothing, #calendar.light .day
         color: rgba(0,0,0,0.5)
     #calendar.light .event
         border-bottom: 0.25px solid rgba(0,0,0,0.15)
@@ -235,7 +237,7 @@ style: """
     #calendar.dark
         background-color: rgba(0,0,0,0.25)
 
-    #calendar.dark header, #calendar.dark .leftBox .time .to, #calendar.dark .rightBox .location, #calendar.dark .nothing, #calendar.dark .day
+    #calendar.dark header, #calendar.dark .leftBox .time .to, #calendar.dark .event .rightBox, #calendar.dark .middleBox .location, #calendar.dark .nothing, #calendar.dark .day
         color: rgba(255,255,255,0.5) 
     #calendar.dark .event
         border-bottom: 0.25px solid rgba(255,255,255,0.25)
@@ -252,13 +254,13 @@ style: """
     header .widgetName
         margin-left: 24px
         font-size: 13px
-        line-height: 24px
+        line-height: 23px
 
     .miniDate
         background-color: white
         border-radius: 5px
-        width: 22px
-        height: 22px
+        width: 21px
+        height: 21px
         margin-top: -39px
         margin-left: -5px
         text-align: center
@@ -268,13 +270,14 @@ style: """
     .miniDate .iDate
         padding: 1px
         color: black
-        font-size: 14px
+        font-size: 13px
+        line-height: 4px
 
     .miniDate .idate
         color: red
-        font-size: 4px
+        font-size: 3px
         font-weight: 200
-        line-height: 9px
+        line-height: 10px
 
     .miniDate .idate:first-letter
         text-transform: uppercase
@@ -304,7 +307,7 @@ style: """
     .event
         display: flex
         flex-direction: row
-
+        
     .event .title
         text-overflow: ellipsis
         white-space: nowrap
@@ -313,13 +316,22 @@ style: """
         padding: 2px 0 0 1px
         font-size: 17px
         line-height: 24px
-
+		
     .event .leftBox
         width: 17.65%
         min-height: 45.75px
         margin: 2px 10px 2px 7.5px
         border-right: 2px solid
 
+    .event .rightBox
+        width: 10%
+        flex-grow: 1
+        padding: 29px 15px 0 0
+        margin-left: -60px
+        font-size: 12px
+        line-height: 17px
+        text-align: right
+        
     .leftBox .time
         text-align: right
 
@@ -327,17 +339,25 @@ style: """
         padding: 3px 14px 0 0
         font-size: 12px;
         line-height: 22px
-
+        text-overflow: ellipsis
+        white-space: wrap
+        overflow: hidden
+        max-width: 8ch
+        
     .leftBox .time .to
         padding: 0 14px 0 0
         font-size: 12px;
         line-height: 20px
+        text-overflow: ellipsis
+        white-space: wrap
+        overflow: hidden
+        max-width: 8ch
 
-    .rightBox .location
+    .middleBox .location
         text-overflow: ellipsis
         white-space: nowrap
         overflow: hidden
-        max-width: 35ch
+        max-width: 27ch
         padding: 3px 0 0 1px
         font-size: 12px
         line-height: 17px

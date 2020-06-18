@@ -64,7 +64,7 @@ style: """
     font-weight: 300
     width: 100%
     position: absolute
-    top: 33%
+    top: 30%
     letter-spacing: 0.875px
 //    transform: scale(1)
 
@@ -72,7 +72,7 @@ style: """
         border-radius: 13px
         -webkit-backdrop-filter: blur(25px)
         width: 349px
-        height: 80px
+        height: 87px
         position: absolute
         top: 0
         left 50%
@@ -100,13 +100,13 @@ style: """
         top: 0
 
     header img
-        width: 22px
+        width: 21px
         margin-right: 7px
-        height: 22px
+        height: 21px
 
     header .widgetName
         font-size: 13px
-        line-height: 24px
+        line-height: 23px
 
     .weatherBox
         overflow-y: scroll
@@ -124,7 +124,7 @@ style: """
 
     .leftBox img
         width: 63px
-        height: 55px
+        height: 60px
 
     .city .middleBox
         flex-grow: 1

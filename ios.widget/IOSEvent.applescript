@@ -1,9 +1,13 @@
+-- Get events using icalBuddy.
 try
 	set rawOutput to do shell script "/usr/local/bin/icalBuddy -npn -nc -iep 'title,datetime' -ps ' ^ ' -po 'datetime,title' -df '' -b '' -n -ea eventsToday"
 on error e
 	logEvent(e)
 	return "icalbuddy"
 end try
+
+-- Find the first event and set it up.
+
 set eventList to {}
 set now to time of (current date)
 repeat with myEvent in paragraphs of rawOutput
@@ -13,6 +17,9 @@ repeat with myEvent in paragraphs of rawOutput
 		if startTime > now then copy myEvent to end of eventList
 	end try
 end repeat
+
+-- Make a list of all event start times, to calculate later if there are any conflicts.
+
 set startTimes to {}
 repeat with myEvent in eventList
 	set myEvent to myEvent as string
@@ -20,6 +27,9 @@ repeat with myEvent in eventList
 	copy text item 1 of myEvent to end of startTimes
 	set AppleScript's text item delimiters to ""
 end repeat
+
+-- Calculate time remaining until the next event.
+
 try
 	if (count of items of eventList) ³ 1 then
 		set nextEvent to item 1 of eventList
@@ -37,6 +47,9 @@ on error e
 	logEvent(e)
 	return "Error: " & e
 end try
+
+-- Add some urgency to the UI.
+
 if hrs = 0 and mins ² 2 then
 	set remainingTime to "Nu"
 else if hrs ³ 1 and hrs ² 2 and mins = 0 then
@@ -48,12 +61,18 @@ else if hrs ³ 3 then
 else if hrs ² 1 then
 	set remainingTime to "over " & mins & " min."
 end if
+
+-- Set up info about subsequent events.
+
 set subsequentEvents to (count of items of eventList) - 1
 if subsequentEvents ³ 1 then
 	set meta to "+ " & subsequentEvents & " later"
 else
 	set meta to 0
 end if
+
+-- Set up info about conflicts.
+
 set conflicts to count_matches(startTimes, item 1 of startTimes) - 1
 if conflicts is not 0 then
 	if conflicts > 1 then
@@ -63,6 +82,9 @@ if conflicts is not 0 then
 	end if
 	set meta to "+ " & conflicts & " conflict" & plural
 end if
+
+-- Return the output for Ubersicht.
+
 return remainingTime & " ^ " & eventName & " ^ " & meta
 on count_matches(this_list, this_item)
 	set the match_counter to 0
