@@ -107,6 +107,8 @@ update: (output) ->
 			continue
 
 
+	next = output.split("^")[0]
+
 #	dt = new Date()
 #	dt = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 #	console.log dt
@@ -135,7 +137,7 @@ update: (output) ->
 			inner += "</div><div class='location'>"
 			inner += loc
 			inner += "</div></div><div class='rightBox'><div>"
-			inner += ''
+			inner += next
 			inner += "</div></div></div>"
 	else    inner += "<div class='nothing'>Geen activiteiten</div>"
 	inner += "</div>"
@@ -160,7 +162,7 @@ update: (output) ->
 			inner += "</div><div class='location'>"
 			inner += loc
 			inner += "</div></div><div class='rightBox'><div>"
-			inner += ''
+			inner += time
 			inner += "</div></div></div>"
 	else    inner += "<div class='nothing'>Geen activiteiten morgen</div>"
 	inner += "</div>"
@@ -185,7 +187,7 @@ update: (output) ->
 			inner += "</div><div class='location'>"
 			inner += loc
 			inner += "</div></div><div class='rightBox'><div>"
-			inner += ''
+			inner += time
 			inner += "</div></div></div>"
 	else	inner += "<div class='nothing'>Geen activiteiten overmorgen</div>"
 	inner += "</div>"
@@ -193,7 +195,7 @@ update: (output) ->
 	$(calendar).html(inner)
 
 	birthdaygift = document.getElementById('calendar')
-	birthdaygift.innerHTML = birthdaygift.innerHTML.replace(/􀑉/g, (match) -> '<n style=color:rgb(252,62,48)>' + match + '</n>')
+	birthdaygift.innerHTML = birthdaygift.innerHTML.replace(/􀑉|•/g, (match) -> '<n style=color:rgb(252,62,48)>' + match + '</n>')
 
 style: """
     color: rgb(225,225,225)
@@ -320,8 +322,8 @@ style: """
     .event .rightBox
         width: 10%
         flex-grow: 1
-        padding: 29px 15px 0 0
-        margin-left: -60px
+        padding: 29px 16px 0 0
+        margin-left: -15ch
         font-size: 12px
         line-height: 17px
         text-align: right
