@@ -70,7 +70,7 @@ style: """
 
     #weather
         border-radius: 13px
-        -webkit-backdrop-filter: blur(25px)
+        -webkit-backdrop-filter: blur(20px)
         width: 349px
         height: 87px
         position: absolute
@@ -124,7 +124,7 @@ style: """
 
     .leftBox img
         width: 63px
-        height: 60px
+        height: 55px
 
     .city .middleBox
         flex-grow: 1

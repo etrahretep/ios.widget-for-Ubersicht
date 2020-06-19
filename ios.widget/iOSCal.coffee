@@ -69,7 +69,6 @@ update: (output) ->
 	for i in [0...lines.length]
 		if (lines[i].event.time.includes('vandaag om'))
 			lines[i].event.time = lines[i].event.time.replace("vandaag om ","")
-			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i,"")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			today.push(lines[i].event)
 			continue
@@ -77,37 +76,32 @@ update: (output) ->
 		else if(lines[i].event.time.includes('vandaag')&&!lines[i].event.time.includes('om'))
 			lines[i].event.time = lines[i].event.time.replace("vandaag ","")
 			lines[i].event.time = "hele dag - "
-			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			today.push(lines[i].event)
 			continue
 
-		else if(lines[i].event.time.includes('morgen om')&&!lines[i].event.time.includes('over '))
+		else if(lines[i].event.time.includes('morgen om'))
 			lines[i].event.time = lines[i].event.time.replace("morgen om ","")
-			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			tomorrow.push(lines[i].event)
 			continue
 
-		else if(lines[i].event.time.includes('morgen')&&!lines[i].event.time.includes('om')&&!lines[i].event.time.includes('over '))
-			lines[i].event.time = lines[i].event.time.replace("morgen ","hele dag ")
-#			lines[i].event.time = "hele dag - "
-			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
+		else if(lines[i].event.time.includes('morgen')&&!lines[i].event.time.includes('om')&&!lines[i].event.time.includes('over'))
+			lines[i].event.time = lines[i].event.time.replace("morgen ","")
+			lines[i].event.time = "hele dag - "
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			tomorrow.push(lines[i].event)
 			continue
 
 		else if (lines[i].event.time.includes('overmorgen  om'))
 			lines[i].event.time = lines[i].event.time.replace("overmorgen  om ","")
-			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			dayaftertomorrow.push(lines[i].event)
 			continue
 
 		else if(lines[i].event.time.includes('overmorgen ')&&!lines[i].event.time.includes('om'))
-			lines[i].event.time = lines[i].event.time.replace("overmorgen  ","hele dag ")
-#			lines[i].event.time = "hele dag - "
-			#lines[i].event.name = lines[i].event.name.replace(/\([A-z]*\)/i, "")
+			lines[i].event.time = lines[i].event.time.replace("overmorgen  ","")
+			lines[i].event.time = "hele dag - "
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			dayaftertomorrow.push(lines[i].event)
 			continue
@@ -213,7 +207,7 @@ style: """
 
     #calendar
         border-radius: 13px
-        -webkit-backdrop-filter: blur(25px)
+        -webkit-backdrop-filter: blur(20px)
         width: 359px
         max-height: 450px
         height: flex
@@ -340,7 +334,7 @@ style: """
         font-size: 12px;
         line-height: 22px
         text-overflow: ellipsis
-        white-space: wrap
+        white-space: nowrap
         overflow: hidden
         max-width: 8ch
         
@@ -349,7 +343,7 @@ style: """
         font-size: 12px;
         line-height: 20px
         text-overflow: ellipsis
-        white-space: wrap
+        white-space: nowrap
         overflow: hidden
         max-width: 8ch
 
@@ -357,7 +351,7 @@ style: """
         text-overflow: ellipsis
         white-space: nowrap
         overflow: hidden
-        max-width: 27ch
+        max-width: 35ch
         padding: 3px 0 0 1px
         font-size: 12px
         line-height: 17px
