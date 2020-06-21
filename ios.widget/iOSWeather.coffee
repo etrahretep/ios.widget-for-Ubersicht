@@ -1,17 +1,11 @@
 mode = "light"
 
 apiKey = "195785bd2dd750dca8ceb2ad990b904d"
-cityList = "2759821,2751316"
+cityList = "2759821"
 units = "metric"
-lang = "nl"
-lat = "52.1994"
-lon = "5.374"
+lang = "en"
 
 command: "ios.widget/weather.sh"
-
-#lat=35&lon=139
-#command: "curl -s 'http://api.openweathermap.org/data/2.5/group?lat=#{lat}&lon=#{lon}&id=#{cityList}&lang=#{lang}&units=#{units}&appid=#{apiKey}'"
-#http://api.openweathermap.org/data/2.5/group?lat=52.1994&lon=5.374&id=2759821,2751316&lang=nl&units=metric&appid=195785bd2dd750dca8ceb2ad990b904d
 
 refreshFrequency: '5m'
 
@@ -27,7 +21,7 @@ update: (output, domEl) ->
 
     inner = ''
     inner += "<div id='weather' class='#{mode}'>" 
-    inner += "<header><img src='ios.widget/icons/weather.svg' alt='icon'></img><div class='widgetName'>WEER</div></header>"
+    inner += "<header><img src='ios.widget/icons/weather.svg' alt='icon'></img><div class='widgetName'>WEATHER</div></header>"
     inner += "<div class='weatherBox'>" 
 
     for i in [0...weatherData.cnt]
@@ -44,7 +38,7 @@ update: (output, domEl) ->
         inner += city
         inner += "</div><div class='condition'>"
         inner += condition
-        inner += "</div><div class='clouds'>bewolking: "
+        inner += "</div><div class='clouds'>clouds: "
         inner += clouds
         inner += "%</div></div><div class='rightBox'><div class='temperature'>"
         inner += temperature

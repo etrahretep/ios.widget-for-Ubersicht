@@ -1,10 +1,10 @@
 calendars = [
-	{name:"Astrid",color:"rgb(235,136,53)"},
-	{name:"Familie",color:"rgb(129,213,84)"},
-	{name:"Peter",color:"rgb(190,122,220)"},
-	{name:"Printshapes",color:"rgb(233,67,107)"}
-	{name:"Verjaardagen",color:"rgb(132,148,173)"}
-	{name:"Nederlandse feestdagen",color:"rgb(80,172,243)"}
+	{name:"",color:"rgb(235,136,53)"},
+	{name:"",color:"rgb(129,213,84)"},
+	{name:"",color:"rgb(190,122,220)"},
+	{name:"",color:"rgb(233,67,107)"}
+	{name:"",color:"rgb(132,148,173)"}
+	{name:"",color:"rgb(80,172,243)"}
 ]
 
 mode = "light"
@@ -54,7 +54,7 @@ update: (output) ->
 
 	inner = ""
 	inner += "<div id='calendar' class='#{mode}'>" 
-	inner += "<header><div class='widgetName'>AGENDA</header>"
+	inner += "<header><div class='widgetName'>CALENDAR</header>"
 	inner += "<div class='miniDate'>"
 	inner += "<div class='idate'>"
 	inner += date[0]
@@ -67,54 +67,47 @@ update: (output) ->
 	dayaftertomorrow = []
 
 	for i in [0...lines.length]
-		if (lines[i].event.time.includes('vandaag om'))
-			lines[i].event.time = lines[i].event.time.replace("vandaag om ","")
+		if (lines[i].event.time.includes('today at'))
+			lines[i].event.time = lines[i].event.time.replace("today at ","")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			today.push(lines[i].event)
 			continue
 
-		else if(lines[i].event.time.includes('vandaag')&&!lines[i].event.time.includes('om'))
-			lines[i].event.time = lines[i].event.time.replace("vandaag ","")
-			lines[i].event.time = "hele dag - "
+		else if(lines[i].event.time.includes('today')&&!lines[i].event.time.includes('at'))
+			lines[i].event.time = lines[i].event.time.replace("today ","")
+			lines[i].event.time = "all-day - "
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			today.push(lines[i].event)
 			continue
 
-		else if(lines[i].event.time.includes('morgen om'))
-			lines[i].event.time = lines[i].event.time.replace("morgen om ","")
+		else if(lines[i].event.time.includes('tomorrow at')&&!lines[i].event.time.includes('day')&&!lines[i].event.time.includes('after'))
+			lines[i].event.time = lines[i].event.time.replace("tomorrow at ","")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			tomorrow.push(lines[i].event)
 			continue
 
-		else if(lines[i].event.time.includes('morgen')&&!lines[i].event.time.includes('om')&&!lines[i].event.time.includes('over'))
-			lines[i].event.time = lines[i].event.time.replace("morgen ","")
-			lines[i].event.time = "hele dag - "
+		else if(lines[i].event.time.includes('tomorrow')&&!lines[i].event.time.includes('at')&&!lines[i].event.time.includes('after'))
+			lines[i].event.time = lines[i].event.time.replace("tomorrow ","")
+			lines[i].event.time = "all-day - "
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			tomorrow.push(lines[i].event)
 			continue
 
-		else if (lines[i].event.time.includes('overmorgen  om'))
-			lines[i].event.time = lines[i].event.time.replace("overmorgen  om ","")
+		else if (lines[i].event.time.includes('day after tomorrow at'))
+			lines[i].event.time = lines[i].event.time.replace("day after tomorrow at ","")
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			dayaftertomorrow.push(lines[i].event)
 			continue
 
-		else if(lines[i].event.time.includes('overmorgen ')&&!lines[i].event.time.includes('om'))
-			lines[i].event.time = lines[i].event.time.replace("overmorgen  ","")
-			lines[i].event.time = "hele dag - "
+		else if(lines[i].event.time.includes('day after tomorrow')&&!lines[i].event.time.includes('at'))
+			lines[i].event.time = lines[i].event.time.replace("day after tomorrow ","")
+			lines[i].event.time = "whole - day"
 			lines[i].event.time = lines[i].event.time.split(' - ')
 			dayaftertomorrow.push(lines[i].event)
 			continue
 
 
 	next = output.split("^")[0]
-
-#	dt = new Date()
-#	dt = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-#	console.log dt
-	
-#	nn = Number(new Date)
-#	console.log nn
 
 	inner += "<div class='mainBox'>" 
 	inner += "<div class='today eventBox'>"   
@@ -137,14 +130,14 @@ update: (output) ->
 			inner += "</div><div class='location'>"
 			inner += loc
 			inner += "</div></div><div class='rightBox'><div>"
-			inner += next
+			inner += '•'
 			inner += "</div></div></div>"
-	else    inner += "<div class='nothing'>Geen activiteiten</div>"
+	else    inner += "<div class='nothing'>No activities</div>"
 	inner += "</div>"
 
 	inner += "<div class='tomorrow eventBox'>"
 	if tomorrow.length > 0
-		inner += "<div class='day'>MORGEN</div>"
+		inner += "<div class='day'>TOMORROW</div>"
 		for i in [0...tomorrow.length]
 			name = tomorrow[i].name
 			calendarName = name.match(/\([a-zA-Z0-9\/\s]*?\)$/gmi)
@@ -162,14 +155,14 @@ update: (output) ->
 			inner += "</div><div class='location'>"
 			inner += loc
 			inner += "</div></div><div class='rightBox'><div>"
-			inner += time
+			inner += '•'
 			inner += "</div></div></div>"
-	else    inner += "<div class='nothing'>Geen activiteiten morgen</div>"
+	else    inner += "<div class='nothing'>No activities tomorrrow</div>"
 	inner += "</div>"
 
 	inner += "<div class='dayaftertomorrow eventBox'>"
 	if dayaftertomorrow.length > 0
-		inner += "<div class='day'>OVERMORGEN </div>"
+		inner += "<div class='day'>DAY AFTER TOMORROW </div>"
 		for i in [0...dayaftertomorrow.length]
 			name = dayaftertomorrow[i].name
 			calendarName = name.match(/\([a-zA-Z0-9\/\s]*?\)$/gmi)
@@ -187,9 +180,9 @@ update: (output) ->
 			inner += "</div><div class='location'>"
 			inner += loc
 			inner += "</div></div><div class='rightBox'><div>"
-			inner += time
+			inner += '•'
 			inner += "</div></div></div>"
-	else	inner += "<div class='nothing'>Geen activiteiten overmorgen</div>"
+	else	inner += "<div class='nothing'>No activities day after tomorrrow</div>"
 	inner += "</div>"
 
 	$(calendar).html(inner)

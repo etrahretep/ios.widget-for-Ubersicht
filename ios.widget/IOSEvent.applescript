@@ -41,7 +41,7 @@ try
 		set hrs to (startTime - now) div hours
 		set mins to (startTime - now) mod hours div minutes
 	else
-		return "geen activiteiten"
+		return "No activities"
 	end if
 on error e
 	logEvent(e)
@@ -51,15 +51,15 @@ end try
 -- Add some urgency to the UI.
 
 if hrs = 0 and mins ² 2 then
-	set remainingTime to "Nu"
+	set remainingTime to "Now"
 else if hrs ³ 1 and hrs ² 2 and mins = 0 then
-	set remainingTime to "over " & hrs & " uur"
+	set remainingTime to "in " & hrs & " hrs"
 else if hrs ³ 1 and hrs ² 2 then
-	set remainingTime to "over " & hrs & " uur en " & mins & " min."
+	set remainingTime to "in " & hrs & " hrs and " & mins & " min."
 else if hrs ³ 3 then
-	set remainingTime to "over " & hrs & " uur"
+	set remainingTime to "in " & hrs & " hrs"
 else if hrs ² 1 then
-	set remainingTime to "over " & mins & " min."
+	set remainingTime to "in " & mins & " min."
 end if
 
 -- Set up info about subsequent events.
@@ -76,7 +76,7 @@ end if
 set conflicts to count_matches(startTimes, item 1 of startTimes) - 1
 if conflicts is not 0 then
 	if conflicts > 1 then
-		set plural to "en"
+		set plural to "s"
 	else
 		set plural to ""
 	end if

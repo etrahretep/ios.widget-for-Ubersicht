@@ -34,7 +34,7 @@ update: (output, domEl) ->
     div.find('.eventName').html(values[1])
     div.find('.meta').html(values[2])
 
-    if values[0] == 'geen activiteiten'
+    if values[0] == 'No activities'
       div.find('.wrapper').css('display', 'none')
     else
       div.find('.wrapper').css('display', 'block')

@@ -1,7 +1,7 @@
 dateOptions = showDate: true
 dateOptions: dateOptions
 
-command: "LC_TIME='nl_NL.UTF-8' date +'%A %e %B \n %H:%M'"
+command: "LC_TIME='en_EN.UTF-8' date +'%A %e %B \n %H:%M'"
 
 refreshFrequency: '59s'
 
