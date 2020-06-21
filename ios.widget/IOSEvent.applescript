@@ -53,13 +53,13 @@ end try
 if hrs = 0 and mins ² 2 then
 	set remainingTime to "Now"
 else if hrs ³ 1 and hrs ² 2 and mins = 0 then
-	set remainingTime to "in " & hrs & " hrs"
+	set remainingTime to "in " & hrs & " hr"
 else if hrs ³ 1 and hrs ² 2 then
-	set remainingTime to "in " & hrs & " hrs and " & mins & " min."
+	set remainingTime to "in " & hrs & " hr, " & mins & " min"
 else if hrs ³ 3 then
-	set remainingTime to "in " & hrs & " hrs"
+	set remainingTime to "in " & hrs & " hr"
 else if hrs ² 1 then
-	set remainingTime to "in " & mins & " min."
+	set remainingTime to "in " & mins & " min"
 end if
 
 -- Set up info about subsequent events.
